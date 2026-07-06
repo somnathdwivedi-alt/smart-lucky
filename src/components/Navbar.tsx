@@ -133,10 +133,10 @@ export default function Navbar() {
           </div>
         </div>
 
-        {/* Theme toggle (desktop) */}
+        {/* Theme toggle */}
         <button
           onClick={toggleTheme}
-          className="theme-toggle hidden md:inline-flex"
+          className="theme-toggle ml-auto inline-flex md:ml-0"
           aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
           title={theme === 'dark' ? 'Light Mode' : 'Dark Mode'}
         >
@@ -148,7 +148,7 @@ export default function Navbar() {
         {/* Hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="ml-auto flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-700 md:ml-0 lg:hidden"
+          className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-700 lg:hidden"
           aria-label="Toggle menu"
         >
           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
@@ -161,21 +161,7 @@ export default function Navbar() {
       {/* Mobile menu */}
       {open && (
         <div className="relative z-50 max-h-[calc(100vh-4rem)] overflow-y-auto border-t border-slate-100 bg-white px-4 py-4 lg:hidden">
-          {/* Mobile theme toggle */}
-          <div className="mb-4 flex items-center justify-between rounded-xl border border-slate-100 bg-slate-50/50 px-4 py-2.5">
-            <span className="text-[13px] font-semibold text-slate-600">
-              {theme === 'dark' ? 'Dark Mode' : 'Light Mode'}
-            </span>
-            <button
-              onClick={toggleTheme}
-              className="theme-toggle"
-              aria-label={theme === 'dark' ? 'Switch to light mode' : 'Switch to dark mode'}
-            >
-              {theme === 'dark'
-                ? <Sun key="sun" className="theme-toggle-icon h-[18px] w-[18px]" />
-                : <Moon key="moon" className="theme-toggle-icon h-[18px] w-[18px]" />}
-            </button>
-          </div>
+
           <div className="relative mb-4 md:hidden">
             <Search className="absolute left-4 top-1/2 h-4 w-4 -translate-y-1/2 text-slate-400" />
             <input

@@ -587,7 +587,7 @@ export function ImpactLogo({ size = 44 }: { size?: number }) {
       style={{ width: size, height: size }}
     >
       <img
-        src="/images/impact-logo.png"
+        src="/images/impact-logo.svg"
         alt="Impact"
         className="h-full w-full object-contain"
       />
@@ -603,7 +603,7 @@ export function ShareASaleLogo({ size = 44 }: { size?: number }) {
       style={{ width: size, height: size }}
     >
       <img
-        src="/images/shareasale-logo.png"
+        src="/images/shareasale-logo.svg"
         alt="ShareASale"
         className="h-full w-full object-contain"
       />
@@ -619,7 +619,7 @@ export function CJLogo({ size = 44 }: { size?: number }) {
       style={{ width: size, height: size }}
     >
       <img
-        src="/images/cj-logo.png"
+        src="/images/cj-logo.svg"
         alt="CJ Affiliate"
         className="h-full w-full object-contain"
       />
