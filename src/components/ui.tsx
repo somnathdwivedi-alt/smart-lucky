@@ -583,12 +583,14 @@ export function ClickBankLogo({ size = 44 }: { size?: number }) {
 export function ImpactLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#E11D48] to-[#F43F5E] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#fff" d="M24 6C14.1 6 6 14.1 6 24s8.1 18 18 18 18-8.1 18-18S33.9 6 24 6zm-2 26v-8h-6l10-12v8h6L22 32z" />
-      </svg>
+      <img
+        src="/images/impact-logo.png"
+        alt="Impact"
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }
@@ -597,12 +599,14 @@ export function ImpactLogo({ size = 44 }: { size?: number }) {
 export function ShareASaleLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#F59E0B] to-[#FBBF24] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#fff" d="M24 6L8 18v12l16 12 16-12V18L24 6zm0 4.5L36 20v8L24 36 12 28v-8l12-9.5zm-6.5 11l6.5 5 6.5-5L24 13l-6.5 8.5z" />
-      </svg>
+      <img
+        src="/images/shareasale-logo.png"
+        alt="ShareASale"
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }
@@ -611,12 +615,14 @@ export function ShareASaleLogo({ size = 44 }: { size?: number }) {
 export function CJLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-gradient-to-br from-[#0F766E] to-[#14B8A6] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.48} height={size * 0.48} viewBox="0 0 48 48">
-        <path fill="#fff" d="M8 12c0-2.2 1.8-4 4-4h8v4h-8v8h6v4h-6v12h-4V12zm16 0h12v4h-8v4h6v4h-6v8h-4V12zm12 0h4v20h-4V12z" />
-      </svg>
+      <img
+        src="/images/cj-logo.png"
+        alt="CJ Affiliate"
+        className="h-full w-full object-contain"
+      />
     </span>
   );
 }

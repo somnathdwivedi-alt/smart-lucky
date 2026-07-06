@@ -36,39 +36,39 @@ export default function SearchResults() {
   );
 
   return (
-    <div className="bg-[#F8FAFC] pb-8">
+    <div className="bg-secondary pb-8">
       <PageHeader crumbs={[{ label: "Home", route: "home" }, { label: "Search" }]} />
 
       <div className="mx-auto max-w-[1280px] px-6 pt-8 sm:px-8">
         {/* ─────── SEARCH INPUT ─────── */}
         <Reveal>
           <div className="relative mx-auto max-w-3xl">
-            <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-[#6B7280]" />
+            <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-500" />
             <input
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder="Search SEO tools..."
-              className="h-14 w-full rounded-2xl border border-[#E5E7EB] bg-white pl-14 pr-14 text-[18px] text-[#111827] shadow-sm outline-none transition-all placeholder:text-[#6B7280] focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+              className="h-14 w-full rounded-2xl border border-slate-200 bg-white pl-14 pr-14 text-[18px] text-slate-900 shadow-sm outline-none transition-all placeholder:text-slate-500 focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
             />
             {query && (
               <button
                 onClick={() => setQuery("")}
-                className="absolute right-5 top-1/2 -translate-y-1/2 text-[#6B7280] transition-colors hover:text-[#111827]"
+                className="absolute right-5 top-1/2 -translate-y-1/2 text-slate-500 transition-colors hover:text-slate-900"
                 aria-label="Clear search"
               >
                 <X className="h-5 w-5" />
               </button>
             )}
           </div>
-          <p className="mt-4 text-center text-[15px] text-[#6B7280]">
-            <span className="font-semibold text-[#111827]">{filtered.length} results</span> found for "
+          <p className="mt-4 text-center text-[15px] text-slate-500">
+            <span className="font-semibold text-slate-900">{filtered.length} results</span> found for "
             <span className="font-semibold text-indigo-600">{query}</span>"
           </p>
         </Reveal>
 
         {/* ─────── SEARCH CATEGORY TABS ─────── */}
         <Reveal className="mt-8">
-          <div className="flex gap-1 overflow-x-auto border-b border-[#E5E7EB] scrollbar-none">
+          <div className="flex gap-1 overflow-x-auto border-b border-slate-200 scrollbar-none">
             {TABS.map((t) => (
               <button
                 key={t.label}
@@ -76,10 +76,10 @@ export default function SearchResults() {
                 className={`relative shrink-0 px-5 py-4 text-[14px] font-semibold transition-colors ${
                   tab === t.label
                     ? "text-indigo-600"
-                    : "text-[#6B7280] hover:text-[#111827]"
+                    : "text-slate-500 hover:text-slate-900"
                 }`}
               >
-                {t.label} <span className="text-[13px] font-normal text-[#6B7280]">({t.count})</span>
+                {t.label} <span className="text-[13px] font-normal text-slate-500">({t.count})</span>
                 {tab === t.label && (
                   <span className="absolute inset-x-3 -bottom-px h-[3px] rounded-full bg-indigo-600" />
                 )}
@@ -92,13 +92,13 @@ export default function SearchResults() {
         <div className="mt-8 grid items-start gap-8 lg:grid-cols-[280px_1fr]">
           {/* Sidebar Filters */}
           <aside className="lg:sticky lg:top-28">
-            <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
-              <div className="mb-2 flex items-center justify-between">
-                <p className="text-[15px] font-bold text-[#111827]">Filters</p>
-                <button className="text-[13px] font-semibold text-indigo-600 hover:text-indigo-800">
-                  Clear All
-                </button>
-              </div>
+              <div className="card p-6">
+                <div className="mb-2 flex items-center justify-between">
+                  <p className="text-[15px] font-bold text-slate-900">Filters</p>
+                  <button className="text-[13px] font-semibold text-indigo-600 hover:text-indigo-800">
+                    Clear All
+                  </button>
+                </div>
               <FilterGroup
                 title="Category"
                 options={[
@@ -113,9 +113,9 @@ export default function SearchResults() {
               />
               <RatingFilterGroup />
               <FilterGroup title="Free Trial" options={[{ label: "Yes" }]} />
-              <div className="border-b border-[#E5E7EB] py-[14px]">
-                <p className="font-heading mb-4 text-[13px] font-extrabold text-[#111827]">Sort By</p>
-                <select className="h-11 w-full rounded-xl border border-[#E5E7EB] bg-white px-3 text-[13px] font-semibold text-[#111827] outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
+              <div className="border-b border-slate-200 py-[14px]">
+                <p className="font-heading mb-4 text-[13px] font-extrabold text-slate-900">Sort By</p>
+                <select className="h-11 w-full rounded-xl border border-slate-200 bg-white px-3 text-[13px] font-semibold text-slate-900 outline-none focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100">
                   {["Most Relevant", "Most Popular", "Highest Rated", "Newest"].map((o) => (
                     <option key={o}>{o}</option>
                   ))}
@@ -126,9 +126,9 @@ export default function SearchResults() {
 
           {/* Results */}
           <div>
-            <p className="mb-5 text-[14px] text-[#6B7280]">
-              Showing <span className="font-semibold text-[#111827]">1–{filtered.length}</span> of{" "}
-              <span className="font-semibold text-[#111827]">{filtered.length}</span> results
+            <p className="mb-5 text-[14px] text-slate-500">
+              Showing <span className="font-semibold text-slate-900">1–{filtered.length}</span> of{" "}
+              <span className="font-semibold text-slate-900">{filtered.length}</span> results
             </p>
 
             <div className="space-y-5">
@@ -145,13 +145,13 @@ export default function SearchResults() {
 
             {/* ─────── REQUEST TOOL CTA ─────── */}
             <Reveal className="mt-12">
-              <div className="rounded-2xl border border-[#E5E7EB] bg-white p-8 shadow-sm">
+              <div className="rounded-2xl border border-slate-200 bg-white p-8 shadow-sm">
                 <div className="flex flex-col items-center gap-6 sm:flex-row">
                   <div className="flex-1">
-                    <p className="text-[22px] font-bold text-[#111827]">
+                    <p className="text-[18px] font-bold text-slate-900 sm:text-[22px]">
                       Can't find what you're looking for?
                     </p>
-                    <p className="mt-2 text-[15px] leading-relaxed text-[#6B7280]">
+                    <p className="mt-2 text-[15px] leading-relaxed text-slate-500">
                       Request a tool and we will review it for you. We add new tools and deals every single week.
                     </p>
                     <button className="mt-5 flex h-[48px] items-center justify-center rounded-xl bg-indigo-600 px-8 text-[15px] font-bold text-white shadow-lg shadow-indigo-500/30 transition-all hover:bg-indigo-700">

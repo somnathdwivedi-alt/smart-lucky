@@ -51,7 +51,7 @@ export default function NewsDetail({ id }: { id?: string }) {
   };
 
   return (
-    <div className="bg-slate-50/50 pb-4">
+    <div className="bg-secondary pb-4">
       <PageHeader
         crumbs={[
           { label: "Home", route: "home" },

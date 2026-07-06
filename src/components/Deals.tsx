@@ -72,9 +72,9 @@ function DealCard({ deal }: { deal: (typeof DEALS)[number] }) {
 
 export function BestDeals() {
   return (
-    <section className="bg-slate-50/70">
-      <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 lg:py-16">
-        <SectionHeading title="Today's Best Deals" linkLabel="View All Deals" linkRoute="deals" />
+      <section className="bg-secondary">
+        <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 lg:py-16">
+          <SectionHeading title="Today's Best Deals" linkLabel="View All Deals" linkRoute="deals" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
           {DEALS.map((d, i) => (
             <Reveal key={d.name} delay={i * 0.07}>
@@ -114,7 +114,7 @@ export function ComparePlatforms() {
                     VS
                   </span>
                 )}
-                <div className="flex w-64 items-center gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg">
+                <div className="flex w-full items-center gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg sm:w-64">
                   {c.brand === "googleads" ? (
                     <GoogleAdsLogo size={50} />
                   ) : (

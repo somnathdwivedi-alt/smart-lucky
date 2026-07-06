@@ -19,7 +19,7 @@ const PLATFORMS = [
 
 export function AdPlatforms() {
   return (
-    <section className="bg-slate-50/70">
+    <section className="bg-secondary">
       <div className="mx-auto max-w-[1440px] px-4 py-12 sm:px-8 lg:py-16">
         <SectionHeading title="Popular Advertising Platforms" linkLabel="View All" linkRoute="tools" />
         <div className="grid grid-cols-2 gap-6 sm:grid-cols-3 md:grid-cols-4 xl:grid-cols-8">

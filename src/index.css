@@ -374,6 +374,210 @@ h1, h2, h3, h4, h5, h6 {
    THEME TOGGLE
 ═══════════════════════════════════════════════ */
 
+/* ═══════════════════════════════════════════════
+   DARK THEME
+═══════════════════════════════════════════════ */
+
+.dark {
+  /* Backgrounds */
+  --color-bg-primary: #070B14;
+  --color-bg-secondary: #0D1320;
+  --color-bg-tertiary: #0A0F1B;
+  --color-bg-card: #111827;
+  --color-bg-card-elevated: #161E2E;
+  --color-bg-input: #0E1421;
+  --color-bg-nav: rgba(8, 12, 22, 0.95);
+
+  /* Text */
+  --color-text-primary: #FFFFFF;
+  --color-text-secondary: #C8CFDA;
+  --color-text-paragraph: #B6C0D0;
+  --color-text-muted: #8A94A6;
+
+  /* Borders */
+  --color-border-subtle: rgba(255, 255, 255, 0.08);
+  --color-border-purple: rgba(124, 92, 255, 0.35);
+  --color-divider: rgba(255, 255, 255, 0.05);
+
+  /* Inputs */
+  --color-input-border: rgba(255, 255, 255, 0.08);
+  --color-input-placeholder: #7C8798;
+
+  /* Shadows */
+  --shadow-card: 0 15px 40px rgba(0, 0, 0, 0.45);
+  --shadow-card-hover: 0 20px 50px rgba(0, 0, 0, 0.55);
+  --shadow-purple-glow: 0 10px 30px rgba(109, 77, 255, 0.35);
+  --shadow-purple-glow-strong: 0 20px 50px rgba(0, 0, 0, 0.55);
+  --shadow-btn-primary: 0 10px 30px rgba(109, 77, 255, 0.35);
+
+  /* Tailwind core color overrides */
+  --color-white: #0C111D;
+  --color-slate-50: #0D1320;
+  --color-slate-100: #111827;
+  --color-slate-200: #151F2F;
+  --color-slate-300: #1E293B;
+  --color-slate-400: #8A94A6;
+  --color-slate-500: #B6C0D0;
+  --color-slate-600: #C8CFDA;
+  --color-slate-700: #E2E8F0;
+  --color-slate-800: #F8FAFC;
+  --color-slate-900: #FFFFFF;
+
+  /* Badge & indicator bg colors */
+  --color-indigo-50: #101828;
+  --color-emerald-50: #0A1F14;
+  --color-amber-50: #1E1705;
+  --color-rose-50: #1F0C12;
+  --color-violet-50: #130F24;
+  --color-purple-50: #120D24;
+  --color-orange-50: #1E0F05;
+  --color-sky-50: #0C1823;
+  --color-red-50: #1F0C0C;
+  --color-blue-50: #0D1725;
+  --color-cyan-50: #0A1A1F;
+  --color-pink-50: #1F0D17;
+  --color-lime-50: #0E1A0A;
+  --color-yellow-50: #1E1705;
+  --color-teal-50: #0A1A17;
+  --color-green-50: #0A1F0E;
+
+  /* Badge text/border colors */
+  --color-emerald-200: rgba(34, 197, 94, 0.3);
+  --color-emerald-600: #22C55E;
+  --color-indigo-200: rgba(99, 102, 241, 0.3);
+  --color-indigo-400: rgba(99, 102, 241, 0.6);
+  --color-indigo-600: #818CF8;
+  --color-amber-200: rgba(250, 204, 21, 0.3);
+  --color-amber-400: #FBBF24;
+  --color-amber-600: #F59E0B;
+  --color-rose-200: rgba(244, 63, 94, 0.3);
+  --color-rose-500: #FB7185;
+  --color-violet-200: rgba(139, 92, 246, 0.3);
+  --color-violet-600: #A78BFA;
+  --color-purple-200: rgba(168, 85, 247, 0.3);
+  --color-purple-400: #C084FC;
+  --color-purple-500: #A855F7;
+  --color-purple-600: #A78BFA;
+  --color-orange-200: rgba(251, 146, 60, 0.3);
+  --color-orange-600: #FB923C;
+  --color-sky-200: rgba(56, 189, 248, 0.3);
+  --color-sky-300: #7DD3FC;
+  --color-sky-700: #38BDF8;
+  --color-red-500: #F87171;
+  --color-blue-500: #60A5FA;
+
+  /* Gradient / accent colors */
+  --color-indigo-500: #818CF8;
+  --color-indigo-700: #6366F1;
+  --color-indigo-100: rgba(99, 102, 241, 0.1);
+  --color-indigo-300: rgba(99, 102, 241, 0.4);
+  --color-blue-100: rgba(59, 130, 246, 0.1);
+  --color-cyan-100: rgba(6, 182, 212, 0.1);
+
+  /* Background utility overrides */
+  --color-bg-indigo-50: #101828;
+  --color-bg-indigo-100: rgba(99, 102, 241, 0.1);
+  --color-bg-amber-50: #1E1705;
+
+  /* Text colors matching dark theme */
+  --color-indigo-600: #818CF8;
+  --color-indigo-400: #A5B4FC;
+  --color-amber-500: #F59E0B;
+}
+
+/* Theme transition */
+.theme-transition,
+.theme-transition * {
+  transition: background-color 0.35s ease,
+              color 0.35s ease,
+              border-color 0.35s ease,
+              box-shadow 0.35s ease !important;
+}
+
+/* Dark navbar */
+.dark .navbar {
+  border-bottom-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Dark footer */
+.dark .footer {
+  background: #070B14;
+  border-top-color: rgba(255, 255, 255, 0.06);
+}
+
+/* Dark card hover */
+.dark .card-hover:hover {
+  border-color: rgba(124, 92, 255, 0.35);
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 10px 30px rgba(109, 77, 255, 0.35);
+}
+
+/* Dark btn-secondary */
+.dark .btn-secondary {
+  background: transparent;
+  border-color: rgba(255, 255, 255, 0.10);
+  color: var(--color-text-secondary);
+}
+.dark .btn-secondary:hover {
+  background: rgba(109, 77, 255, 0.15);
+}
+
+/* Dark btn-ghost */
+.dark .btn-ghost:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+/* Dark dropdown */
+.dark .dropdown-item:hover {
+  background: rgba(255, 255, 255, 0.05);
+  color: var(--color-text-primary);
+}
+
+/* Dark tab */
+.dark .tab:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+.dark .tab-active {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: var(--color-border-purple);
+}
+
+/* Dark glass */
+.dark .glass {
+  background: rgba(8, 12, 22, 0.7);
+  border-color: rgba(255, 255, 255, 0.08);
+}
+.dark .glass-strong {
+  background: rgba(8, 12, 22, 0.85);
+  border-color: rgba(124, 92, 255, 0.35);
+}
+
+/* Dark theme toggle */
+.dark .theme-toggle {
+  border-color: rgba(255, 255, 255, 0.08);
+  background: #111827;
+  color: #C8CFDA;
+}
+.dark .theme-toggle:hover {
+  background: #161E2E;
+  border-color: var(--color-purple-primary);
+}
+
+/* Dark search input in navbar */
+.dark .navbar input {
+  background: #0E1421;
+  border-color: rgba(255, 255, 255, 0.08);
+  color: #FFFFFF;
+}
+.dark .navbar input::placeholder {
+  color: #7C8798;
+}
+
+/* Dark scrollbar */
+.dark ::-webkit-scrollbar-track { background: #070B14; }
+.dark ::-webkit-scrollbar-thumb { background: rgba(255, 255, 255, 0.08); border-color: #070B14; }
+.dark ::-webkit-scrollbar-thumb:hover { background: rgba(255, 255, 255, 0.15); }
+
 .theme-toggle {
   position: relative;
   display: inline-flex;

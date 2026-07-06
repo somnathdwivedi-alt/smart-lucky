@@ -32,21 +32,19 @@ export function ProductOffers() {
             return (
               <Reveal key={id} delay={i * 0.07}>
                 <div className="card card-hover flex h-full flex-col p-4">
-                  <div className="flex items-start justify-between gap-3">
-                    <div className="h-[100px] w-full overflow-hidden rounded-xl bg-slate-100">
-                      <img
-                        src={data.image}
-                        alt={data.name}
-                        className="h-full w-full object-cover"
-                      />
-                    </div>
+                  <div className="relative -mx-4 -mt-4 mb-3 overflow-hidden rounded-t-2xl bg-slate-100" style={{ aspectRatio: "16/9" }}>
+                    <img
+                      src={data.image}
+                      alt={data.name}
+                      className="h-full w-full object-cover"
+                    />
                     {data.rating >= 4.7 && (
-                      <span className="shrink-0 rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-600 ring-1 ring-amber-200">
+                      <span className="absolute right-2 top-2 rounded-full bg-amber-400/90 px-2.5 py-1 text-[10px] font-bold text-amber-900 shadow-lg backdrop-blur-sm">
                         Top Rated
                       </span>
                     )}
                   </div>
-                  <h3 className="mt-3 text-[16px] font-bold text-slate-900">{data.name}</h3>
+                  <h3 className="text-[16px] font-bold text-slate-900">{data.name}</h3>
                   <Rating value={data.rating} className="mt-1" />
                   <p className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-500">{data.description}</p>
                   {badge && (

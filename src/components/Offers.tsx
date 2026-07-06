@@ -99,11 +99,11 @@ export function TrendingOffers() {
 
 /* ---------------- Best Affiliate Programs ---------------- */
 const PROGRAMS = [
-  { brand: "amazon", name: "Amazon Associates", rating: 4.6, commission: "Up to 10%" },
-  { brand: "clickbank", name: "ClickBank", rating: 4.7, commission: "Up to 75%" },
-  { brand: "impact", name: "Impact", rating: 4.6, commission: "Up to 40%" },
-  { brand: "shareasale", name: "ShareASale", rating: 4.5, commission: "Up to 20%" },
-  { brand: "cj", name: "CJ Affiliate", rating: 4.5, commission: "Up to 30%" },
+  { brand: "amazon", name: "Amazon Associates", rating: 4.6, commission: "Up to 10%", desc: "World's largest affiliate program with millions of products to promote.", badge: "Best for Beginners", badgeClass: "border-emerald-200 bg-emerald-50 text-emerald-600" },
+  { brand: "clickbank", name: "ClickBank", rating: 4.7, commission: "Up to 75%", desc: "High-converting digital products with industry-leading commission rates.", badge: "Top Payout", badgeClass: "border-indigo-200 bg-indigo-50 text-indigo-600" },
+  { brand: "impact", name: "Impact", rating: 4.6, commission: "Up to 40%", desc: "Enterprise partnership platform trusted by top global brands.", badge: "Premium Network", badgeClass: "border-violet-200 bg-violet-50 text-violet-600" },
+  { brand: "shareasale", name: "ShareASale", rating: 4.5, commission: "Up to 20%", desc: "Reliable affiliate network with over 4,000 merchants to choose from.", badge: "Trusted Network", badgeClass: "border-amber-200 bg-amber-50 text-amber-600" },
+  { brand: "cj", name: "CJ Affiliate", rating: 4.5, commission: "Up to 30%", desc: "Global affiliate network connecting publishers with Fortune 500 brands.", badge: "Global Reach", badgeClass: "border-sky-200 bg-sky-50 text-sky-600" },
 ];
 
 export function AffiliatePrograms() {
@@ -126,12 +126,22 @@ export function AffiliatePrograms() {
                   <Rating value={p.rating} />
                 </div>
               </div>
+              {p.desc && (
+                <p className="mt-3 flex-1 text-[13px] leading-relaxed text-slate-500 line-clamp-2">
+                  {p.desc}
+                </p>
+              )}
               <p className="mt-3 text-[12px] font-semibold uppercase tracking-wide text-slate-400">
                 Commission
               </p>
               <p className="mt-1 text-[24px] font-extrabold tracking-tight text-slate-900">
                 {p.commission}
               </p>
+              {p.badge && (
+                <span className={`mt-3 block rounded-xl border border-dashed py-2 text-center text-[13px] font-extrabold ${p.badgeClass}`}>
+                  {p.badge}
+                </span>
+              )}
                 <button
                   onClick={() => navigate("affiliate", p.brand)}
                   className="btn-ripple group mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-200 py-2.5 text-[13px] font-bold text-indigo-600 transition-all hover:border-transparent hover:bg-indigo-600 hover:text-white"

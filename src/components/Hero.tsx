@@ -11,7 +11,7 @@ export default function Hero() {
   return (
     <section className="relative overflow-hidden">
       <div className="mx-auto max-w-[1440px] px-4 pt-6 sm:px-8">
-        <div className="relative overflow-hidden rounded-[32px] shadow-lg" style={{ minHeight: 580 }}>
+        <div className="relative overflow-hidden rounded-[32px] shadow-lg sm:min-h-[580px]">
           {/* Full background image */}
           <img
             src="/images/airoplan.jpg"
@@ -20,11 +20,11 @@ export default function Hero() {
             loading="lazy"
           />
           {/* Dark overlay for readability */}
-          <div className="absolute inset-0 bg-gradient-to-r from-white/80 via-white/60 to-transparent" />
+          <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-white/30 lg:via-white/60 lg:to-transparent" />
 
-          <div className="relative flex min-h-[580px] flex-col lg:flex-row">
+          <div className="relative flex min-h-[420px] flex-col lg:min-h-[580px] lg:flex-row">
             {/* ── LEFT CONTENT ── */}
-            <div className="flex flex-col justify-center px-8 pb-8 pt-10 sm:px-12 lg:w-[45%] lg:pb-12 lg:pt-12">
+            <div className="flex flex-col justify-center px-5 pb-6 pt-8 sm:px-12 lg:w-[45%] lg:pb-12 lg:pt-12">
               <motion.div
                 initial="hidden"
                 animate="visible"
@@ -49,7 +49,7 @@ export default function Hero() {
                     hidden: { opacity: 0, y: 30 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.6, ease: [0.22, 1, 0.36, 1] } },
                   }}
-                  className="text-[42px] font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-[54px] xl:text-[66px]"
+                  className="text-[28px] font-extrabold leading-[1.08] tracking-tight text-slate-900 sm:text-[42px] sm:leading-[1.08] xl:text-[66px]"
                 >
                   Find The Best
                   <br />
@@ -63,7 +63,7 @@ export default function Hero() {
                     hidden: { opacity: 0, y: 20 },
                     visible: { opacity: 1, y: 0, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
                   }}
-                  className="max-w-sm text-[17px] leading-relaxed text-slate-500"
+                  className="max-w-sm text-[14px] leading-relaxed text-slate-500 sm:text-[17px]"
                 >
                   Discover trusted SEO, advertising, affiliate marketing and AI tools with verified reviews and exclusive offers.
                 </motion.p>
@@ -74,7 +74,7 @@ export default function Hero() {
                     visible: { opacity: 1, y: 0, scale: 1, transition: { duration: 0.5, ease: [0.22, 1, 0.36, 1] } },
                   }}
                 >
-                  <button className="btn-ripple inline-flex h-[52px] items-center gap-2.5 rounded-full bg-indigo-600 px-8 text-[16px] font-bold text-white shadow-xl shadow-indigo-500/30 transition-all hover:bg-indigo-700 hover:shadow-indigo-500/50">
+                  <button className="btn-ripple inline-flex h-11 items-center gap-2 rounded-full bg-indigo-600 px-6 text-[14px] font-bold text-white shadow-xl shadow-indigo-500/30 transition-all hover:bg-indigo-700 hover:shadow-indigo-500/50 sm:h-[52px] sm:gap-2.5 sm:px-8 sm:text-[16px]">
                     Explore Deals <ArrowRight className="h-4 w-4" />
                   </button>
                 </motion.div>
@@ -109,8 +109,8 @@ export default function Hero() {
               </motion.div>
             </div>
 
-            {/* ── RIGHT SIDE ── */}
-            <div className="relative flex-1 lg:block">
+            {/* ── RIGHT SIDE (desktop only) ── */}
+            <div className="hidden lg:relative lg:block lg:flex-1">
               {/* Floating Info Card */}
               <motion.div
                 initial={{ opacity: 0, y: 20 }}

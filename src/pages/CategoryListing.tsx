@@ -41,11 +41,11 @@ const ICON_MAP: Record<string, typeof Monitor> = {
 
 function AllCategories() {
   return (
-    <div className="bg-[#F8FAFC] pb-4">
+    <div className="bg-secondary pb-4">
       <div className="mx-auto max-w-[1340px] px-6 py-12 sm:px-8">
         <Reveal>
           <div className="mb-14 text-center">
-            <h1 className="text-[36px] font-extrabold tracking-tight text-slate-900 sm:text-[44px]">
+            <h1 className="text-[26px] font-extrabold tracking-tight text-slate-900 sm:text-[36px]">
               Explore <span className="gradient-text">Categories</span>
             </h1>
             <p className="mx-auto mt-3 max-w-lg text-[15px] text-slate-500">
@@ -103,7 +103,7 @@ export default function CategoryListing({ id }: { id?: string }) {
   );
 
   return (
-    <div className="bg-[#F8FAFC] pb-8">
+    <div className="bg-secondary pb-8">
       <PageHeader
         crumbs={[
           { label: "Home", route: "home" },
@@ -114,10 +114,10 @@ export default function CategoryListing({ id }: { id?: string }) {
 
       {/* Category Header */}
       <div className="mx-auto max-w-[1340px] px-6 pt-8 sm:px-8">
-        <h1 className="text-[40px] font-extrabold tracking-tight text-[#111827] sm:text-[48px]">
+        <h1 className="text-[28px] font-extrabold tracking-tight text-slate-900 sm:text-[40px]">
           {cat.title}
         </h1>
-        <p className="mt-2 text-[16px] text-[#6B7280]">
+        <p className="mt-2 text-[16px] text-slate-500">
           {cat.description}
         </p>
 
@@ -130,13 +130,13 @@ export default function CategoryListing({ id }: { id?: string }) {
               value={query}
               onChange={(e) => setQuery(e.target.value)}
               placeholder={cat.searchPlaceholder}
-              className="h-14 w-full rounded-xl border border-[#E5E7EB] bg-white pl-12 pr-5 text-[15px] text-slate-900 outline-none shadow-sm transition-all placeholder:text-[#6B7280] focus:border-indigo-500 focus:ring-4 focus:ring-indigo-100"
+              className="input h-14 w-full rounded-xl pl-12 pr-5 text-[15px]"
             />
           </div>
           <select
             value={sort}
             onChange={(e) => setSort(e.target.value)}
-            className="h-14 w-full rounded-xl border border-[#E5E7EB] bg-white px-4 text-[14px] font-medium text-slate-700 outline-none shadow-sm sm:w-[220px]"
+            className="select h-14 w-full rounded-xl px-4 text-[14px] font-medium sm:w-[220px]"
           >
             {["Popular", "Highest Rated", "Price: Low to High", "Newest"].map((o) => (
               <option key={o}>{o}</option>
@@ -149,9 +149,9 @@ export default function CategoryListing({ id }: { id?: string }) {
       <div className="mx-auto mt-8 grid max-w-[1340px] items-start gap-8 px-6 sm:px-8 lg:grid-cols-[280px_1fr]">
         {/* Sidebar Filters */}
         <aside className="lg:sticky lg:top-28">
-          <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
+          <div className="card p-6">
             <div className="mb-2 flex items-center justify-between">
-              <p className="font-heading flex items-center gap-2 text-[15px] font-extrabold text-[#111827]">
+              <p className="font-heading flex items-center gap-2 text-[15px] font-extrabold text-slate-900">
                 <SlidersHorizontal className="h-4 w-4 text-indigo-500" /> Filters
               </p>
               <button className="text-[13px] font-semibold text-indigo-600 hover:text-indigo-800">
@@ -160,7 +160,7 @@ export default function CategoryListing({ id }: { id?: string }) {
             </div>
             <button
               onClick={() => setShowFilters(!showFilters)}
-              className="mt-3 w-full rounded-xl border border-slate-200 py-2.5 text-[13px] font-bold text-slate-600 lg:hidden"
+              className="btn-secondary mt-3 w-full py-2.5 text-[13px] lg:hidden"
             >
               {showFilters ? "Hide Filters" : "Show Filters"}
             </button>
@@ -197,9 +197,9 @@ export default function CategoryListing({ id }: { id?: string }) {
 
         {/* Listing Area */}
         <div>
-          <p className="mb-5 text-[14px] text-[#6B7280]">
-            Showing <span className="font-semibold text-[#111827]">1–{filtered.length}</span> of{" "}
-            <span className="font-semibold text-[#111827]">{filtered.length}</span> items
+          <p className="mb-5 text-[14px] text-slate-500">
+            Showing <span className="font-semibold text-slate-900">1–{filtered.length}</span> of{" "}
+            <span className="font-semibold text-slate-900">{filtered.length}</span> items
           </p>
 
           <div className="space-y-5">
@@ -216,14 +216,14 @@ export default function CategoryListing({ id }: { id?: string }) {
 
           {/* Popular Searches */}
           <Reveal className="mt-10">
-            <div className="rounded-2xl border border-[#E5E7EB] bg-white p-6 shadow-sm">
-              <p className="font-heading mb-4 text-[15px] font-extrabold text-[#111827]">Popular Searches</p>
+            <div className="card p-6">
+              <p className="font-heading mb-4 text-[15px] font-extrabold text-slate-900">Popular Searches</p>
               <div className="flex flex-wrap gap-2">
                 {cat.trending.map((t) => (
                   <span
                     key={t}
                     onClick={() => setQuery(t)}
-                    className="cursor-pointer rounded-full border border-[#E5E7EB] bg-white px-4 py-1.5 text-[13px] font-medium text-[#6B7280] transition-all hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600"
+                    className="cursor-pointer rounded-full border border-slate-200 bg-card px-4 py-1.5 text-[13px] font-medium text-slate-500 transition-all hover:border-indigo-300 hover:bg-indigo-50 hover:text-indigo-600"
                   >
                     {t}
                   </span>

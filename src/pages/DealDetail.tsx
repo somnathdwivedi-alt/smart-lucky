@@ -96,7 +96,7 @@ export default function DealDetail({ id }: { id?: string }) {
   }));
 
   return (
-    <div className="bg-slate-50/50 pb-4">
+    <div className="bg-secondary pb-4">
       <PageHeader
         crumbs={[
           { label: "Home", route: "home" },
@@ -114,7 +114,7 @@ export default function DealDetail({ id }: { id?: string }) {
               <div className="flex flex-col gap-5 sm:flex-row sm:items-start">
                 <LogoBadge brand={getBrand(deal.brandKey)} size={72} />
                 <div className="flex-1">
-                  <h1 className="text-[24px] font-extrabold tracking-tight text-slate-900 sm:text-[30px]">
+                  <h1 className="text-[20px] font-extrabold tracking-tight text-slate-900 sm:text-[24px]">
                     {deal.name}
                   </h1>
                   <div className="mt-1.5 flex flex-wrap items-center gap-3">

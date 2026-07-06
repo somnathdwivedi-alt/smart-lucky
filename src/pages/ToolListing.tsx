@@ -89,7 +89,7 @@ export default function ToolListing() {
   }
 
   return (
-    <div className="bg-slate-50/50 pb-4">
+    <div className="bg-secondary pb-4">
       <PageHeader
         crumbs={[
           { label: "Home", route: "home" },
@@ -102,34 +102,32 @@ export default function ToolListing() {
       ═══════════════════════════════════════ */}
       <section className="mx-auto max-w-[1440px] px-4 pt-6 sm:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] shadow-lg" style={{ minHeight: 400 }}>
+          <div className="relative overflow-hidden rounded-[28px] shadow-lg sm:min-h-[400px]">
             <img
               src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop"
               alt=""
               className="absolute inset-0 h-full w-full object-cover"
               loading="lazy"
             />
-            <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent" />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/90 via-white/80 to-white/60 sm:via-white/70 sm:to-transparent" />
 
-            <div className="relative p-8 sm:p-10">
-              <h1 className="text-[40px] font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-[52px] xl:text-[60px]">
+            <div className="relative p-5 sm:p-10">
+              <h1 className="text-[28px] font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-[40px] xl:text-[60px]">
                 Marketing Tools
               </h1>
-              <p className="mt-3 max-w-2xl text-[16px] leading-relaxed text-slate-500 sm:text-[18px]">
-                Compare the best marketing tools across SEO, design, AI, email, social media, and productivity.
-                <br />
-                In-depth features, pricing, and user reviews.
+              <p className="mt-3 max-w-2xl text-[14px] leading-relaxed text-slate-500 sm:text-[16px]">
+                Compare the best marketing tools across SEO, design, AI, email, social media, and productivity. In-depth features, pricing, and user reviews.
               </p>
-              <div className="mt-6">
+              <div className="mt-4 sm:mt-6">
                 <p className="mb-2 text-[13px] font-bold text-slate-400">Search Tools</p>
                 <div className="relative max-w-[450px]">
-                  <Search className="absolute left-5 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
+                  <Search className="absolute left-4 top-1/2 h-5 w-5 -translate-y-1/2 text-slate-400" />
                   <input
                     type="text"
                     value={query}
                     onChange={(e) => setQuery(e.target.value)}
                     placeholder="Search tools..."
-                    className="h-[52px] w-full rounded-2xl border border-slate-200 bg-white pl-12 pr-5 text-[15px] shadow-sm outline-none transition-all placeholder:text-slate-400 focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100"
+                    className="h-11 w-full rounded-2xl border border-slate-200 bg-white pl-11 pr-5 text-[14px] shadow-sm outline-none transition-all placeholder:text-slate-400 focus:border-indigo-300 focus:ring-4 focus:ring-indigo-100 sm:h-[52px] sm:pl-12 sm:text-[15px]"
                   />
                 </div>
               </div>
