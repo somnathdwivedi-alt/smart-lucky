@@ -45,11 +45,16 @@ export default function ReviewListing() {
       ═══════════════════════════════════════ */}
       <section className="mx-auto max-w-[1440px] px-4 pt-8 sm:px-8">
         <Reveal>
-          <div className="relative overflow-hidden rounded-[28px] bg-gradient-to-br from-[#F0F2FF] via-white to-[#F5F0FF] p-8 sm:p-12">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-purple-100/40 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 left-1/3 h-60 w-60 rounded-full bg-blue-100/30 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[28px] shadow-lg" style={{ minHeight: 400 }}>
+            <img
+              src="https://images.unsplash.com/photo-1551836022-d5d88e9218df?w=1200&h=600&fit=crop"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent" />
 
-            <div className="relative flex items-center gap-12">
+            <div className="relative flex items-center gap-12 p-8 sm:p-12">
               {/* Left */}
               <div className="flex-1">
                 <h1 className="text-[42px] font-extrabold leading-[1.12] tracking-tight text-slate-900 sm:text-[52px] xl:text-[60px]">

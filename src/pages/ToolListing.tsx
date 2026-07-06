@@ -102,11 +102,16 @@ export default function ToolListing() {
       ═══════════════════════════════════════ */}
       <section className="mx-auto max-w-[1440px] px-4 pt-6 sm:px-8">
         <Reveal>
-          <div className="card relative overflow-hidden p-8 sm:p-10">
-            <div className="pointer-events-none absolute -right-20 -top-20 h-72 w-72 rounded-full bg-cyan-100/60 blur-3xl" />
-            <div className="pointer-events-none absolute -bottom-20 right-1/3 h-56 w-56 rounded-full bg-indigo-100/60 blur-3xl" />
+          <div className="relative overflow-hidden rounded-[28px] shadow-lg" style={{ minHeight: 400 }}>
+            <img
+              src="https://images.unsplash.com/photo-1460925895917-afdab827c52f?w=1200&h=600&fit=crop"
+              alt=""
+              className="absolute inset-0 h-full w-full object-cover"
+              loading="lazy"
+            />
+            <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-transparent" />
 
-            <div className="relative">
+            <div className="relative p-8 sm:p-10">
               <h1 className="text-[40px] font-extrabold leading-[1.1] tracking-tight text-slate-900 sm:text-[52px] xl:text-[60px]">
                 Marketing Tools
               </h1>
@@ -115,7 +120,6 @@ export default function ToolListing() {
                 <br />
                 In-depth features, pricing, and user reviews.
               </p>
-
               <div className="mt-6">
                 <p className="mb-2 text-[13px] font-bold text-slate-400">Search Tools</p>
                 <div className="relative max-w-[450px]">
