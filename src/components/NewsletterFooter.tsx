@@ -118,11 +118,11 @@ export function Footer() {
       <div className="mx-auto grid max-w-[1440px] gap-8 px-4 py-12 sm:grid-cols-2 sm:px-8 lg:grid-cols-[1.6fr_1fr_1fr_1fr_1fr]">
         <div>
           <a href="#" className="flex items-center gap-2">
-            <span className="gradient-bg flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-lg shadow-indigo-500/30">
+            {/* <span className="gradient-bg flex h-9 w-9 items-center justify-center rounded-xl text-white shadow-lg shadow-indigo-500/30">
               <Zap className="h-5 w-5 fill-white" />
-            </span>
+            </span> */}
             <span className="font-heading text-lg font-extrabold tracking-tight text-slate-900">
-              Markety<span className="gradient-text">Deals</span>
+              Smart<span className="gradient-text">Lucky</span>
             </span>
           </a>
           <p className="mt-3 max-w-xs text-[13px] leading-relaxed text-slate-500">
