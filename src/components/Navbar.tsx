@@ -33,7 +33,7 @@ export default function Navbar() {
   const toggleTheme = () => {
     const next = theme === 'light' ? 'dark' : 'light';
     setTheme(next);
-    try { localStorage.setItem('theme', next); } catch {}
+    try { localStorage.setItem('theme', next); } catch { }
     const root = document.documentElement;
     root.classList.add('theme-transition');
     if (next === 'dark') { root.classList.add('dark'); } else { root.classList.remove('dark'); }
@@ -41,7 +41,7 @@ export default function Navbar() {
   };
 
   useEffect(() => {
-    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); } catch {}
+    try { if (localStorage.getItem('theme') === 'dark') document.documentElement.classList.add('dark'); } catch { }
   }, []);
 
   useEffect(() => {
@@ -148,10 +148,10 @@ export default function Navbar() {
         {/* Hamburger */}
         <button
           onClick={() => setOpen(!open)}
-          className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 text-slate-700 lg:hidden"
+          className={`z-50 flex h-11 w-11 items-center justify-center rounded-xl border lg:hidden ${open ? "border-indigo-200 bg-indigo-50 text-indigo-600" : "border-slate-200 bg-white text-slate-700"}`}
           aria-label="Toggle menu"
         >
-          {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
+           {open ? <X className="h-5 w-5" /> : <Menu className="h-5 w-5" />}
         </button>
       </div>
 
