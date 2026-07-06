@@ -130,18 +130,27 @@ h1, h2, h3, h4, h5, h6 {
 .card {
   background: var(--color-bg-card);
   border-radius: var(--radius-card);
-  border: 1px solid var(--color-border-subtle);
-  box-shadow: var(--shadow-card);
+  border: 1px solid rgba(226, 232, 240, 0.8);
+  box-shadow: 0 4px 20px -2px rgba(15, 23, 42, 0.04), 0 2px 8px -1px rgba(15, 23, 42, 0.02);
   transition:
     transform 0.3s cubic-bezier(0.22, 1, 0.36, 1),
-    box-shadow 0.3s ease,
-    border-color 0.3s ease;
+    box-shadow 0.3s cubic-bezier(0.22, 1, 0.36, 1),
+    border-color 0.3s cubic-bezier(0.22, 1, 0.36, 1);
 }
 
 .card-hover:hover {
   transform: translateY(-4px);
   border-color: var(--color-purple-primary);
   box-shadow: var(--shadow-card-hover), var(--shadow-purple-glow-strong);
+}
+
+/* If a card is inside a tilt container, do not apply translateY on hover to avoid Framer Motion conflicts */
+.group\/tilt:hover .card {
+  border-color: rgba(109, 76, 255, 0.4);
+  box-shadow: 0 20px 35px -10px rgba(109, 76, 255, 0.12), 0 10px 20px -8px rgba(109, 76, 255, 0.08);
+}
+.group\/tilt:hover .card-hover {
+  transform: none !important;
 }
 
 .card-elevated {
@@ -627,6 +636,116 @@ h1, h2, h3, h4, h5, h6 {
 .animate-float-a { animation: float-a 6s ease-in-out infinite; }
 .animate-float-b { animation: float-b 5s ease-in-out 0.6s infinite; }
 .animate-float-c { animation: float-c 7s ease-in-out 1.2s infinite; }
+
+/* ═══════════════════════════════════════════════
+   PARALLAX SCROLL UTILITIES
+═══════════════════════════════════════════════ */
+
+.parallax-slow {
+  will-change: transform;
+  transition: transform 0.1s linear;
+}
+
+.parallax-medium {
+  will-change: transform;
+  transition: transform 0.05s linear;
+}
+
+/* Scroll-reveal perspective */
+.reveal-perspective {
+  perspective: 1200px;
+}
+
+/* Kinetic hover shine that follows mouse on any card */
+.kinetic-shine {
+  position: relative;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.kinetic-shine::before {
+  content: "";
+  position: absolute;
+  inset: -100px;
+  background: radial-gradient(
+    circle 200px at var(--shine-x, 50%) var(--shine-y, 50%),
+    rgba(255, 255, 255, 0.15),
+    transparent 100%
+  );
+  opacity: 0;
+  transition: opacity 0.3s ease;
+  pointer-events: none;
+  z-index: 1;
+}
+
+.kinetic-shine:hover::before {
+  opacity: 1;
+}
+
+/* ═══════════════════════════════════════════════
+   OFFER CARD ANIMATIONS
+═══════════════════════════════════════════════ */
+
+@keyframes card-shake {
+  0%, 100% { transform: translateX(0); }
+  15% { transform: translateX(-4px) scale(1.03); }
+  30% { transform: translateX(4px) scale(1.03); }
+  45% { transform: translateX(-3px) scale(1.03); }
+  60% { transform: translateX(3px) scale(1.03); }
+  75% { transform: translateX(-1px) scale(1.03); }
+  90% { transform: translateX(1px) scale(1.03); }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% center; }
+  100% { background-position: 200% center; }
+}
+
+.offer-card {
+  transition:
+    transform 0.4s cubic-bezier(0.22, 1, 0.36, 1),
+    box-shadow 0.4s ease,
+    border-color 0.4s ease;
+}
+
+.offer-card:hover {
+  animation: card-shake 0.5s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+  box-shadow: 0 20px 50px rgba(15, 23, 42, 0.15), 0 0 0 2px rgba(109, 76, 255, 0.15);
+}
+
+.offer-card .offer-card-image {
+  transition: transform 0.6s cubic-bezier(0.22, 1, 0.36, 1);
+}
+
+.offer-card:hover .offer-card-image {
+  transform: scale(1.08);
+}
+
+.offer-card .offer-card-shine {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    105deg,
+    transparent 40%,
+    rgba(255, 255, 255, 0.3) 45%,
+    rgba(255, 255, 255, 0.5) 50%,
+    rgba(255, 255, 255, 0.3) 55%,
+    transparent 60%
+  );
+  background-size: 200% 100%;
+  opacity: 0;
+  transition: opacity 0.4s ease;
+  pointer-events: none;
+}
+
+.offer-card:hover .offer-card-shine {
+  opacity: 1;
+  animation: shimmer 1.2s ease-in-out infinite;
+}
+
+.dark .offer-card:hover {
+  box-shadow: 0 20px 50px rgba(0, 0, 0, 0.55), 0 0 0 2px rgba(124, 92, 255, 0.25);
+}
 
 /* ═══════════════════════════════════════════════
    BTN RIPPLE

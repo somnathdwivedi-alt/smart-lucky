@@ -1,6 +1,6 @@
-import { motion, useInView } from "framer-motion";
+import { motion, useInView, useMotionValue, useTransform } from "framer-motion";
 import { ArrowRight, Star } from "lucide-react";
-import { useRef, type ReactNode } from "react";
+import { useEffect, useRef, type ReactNode } from "react";
 import { cn } from "../utils/cn";
 import { navigate, type Route } from "../router";
 
@@ -230,6 +230,105 @@ export function HoverScale({
   );
 }
 
+/* ---------- Mouse-follow glow (kinetic) ---------- */
+export function MouseGlow() {
+  const ref = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handler = (e: MouseEvent) => {
+      if (ref.current) {
+        ref.current.style.setProperty("--mx", `${e.clientX}px`);
+        ref.current.style.setProperty("--my", `${e.clientY}px`);
+      }
+    };
+    window.addEventListener("mousemove", handler, { passive: true });
+    return () => window.removeEventListener("mousemove", handler);
+  }, []);
+
+  return (
+    <div
+      ref={ref}
+      className="pointer-events-none fixed inset-0 z-50 hidden lg:block"
+      style={{
+        background:
+          "radial-gradient(700px at var(--mx, -1000px) var(--my, -1000px), rgba(109, 76, 255, 0.06), transparent 80%)",
+      }}
+    />
+  );
+}
+
+/* ---------- 3D Tilt Card (kinetic) ---------- */
+export function TiltCard({
+  children,
+  className,
+  scale = 1.015,
+}: {
+  children: ReactNode;
+  className?: string;
+  scale?: number;
+}) {
+  const ref = useRef<HTMLDivElement>(null);
+  const tiltX = useMotionValue(0);
+  const tiltY = useMotionValue(0);
+  const glowX = useMotionValue(50);
+  const glowY = useMotionValue(50);
+
+  const handleMouseMove = (e: React.MouseEvent) => {
+    const el = ref.current;
+    if (!el) return;
+    const rect = el.getBoundingClientRect();
+    const x = (e.clientX - rect.left) / rect.width;
+    const y = (e.clientY - rect.top) / rect.height;
+    tiltX.set((x - 0.5) * 8);
+    tiltY.set((y - 0.5) * -8);
+    glowX.set(x * 100);
+    glowY.set(y * 100);
+  };
+
+  const resetTilt = () => {
+    tiltX.set(0);
+    tiltY.set(0);
+    glowX.set(50);
+    glowY.set(50);
+  };
+
+  return (
+    <motion.div
+      ref={ref}
+      className={cn("relative group/tilt", className)}
+      onMouseMove={handleMouseMove}
+      onMouseEnter={() => { }}
+      onMouseLeave={resetTilt}
+      style={{ perspective: "1200px" }}
+    >
+      <motion.div
+        style={{
+          rotateX: tiltY,
+          rotateY: tiltX,
+        }}
+        transition={{ type: "spring", stiffness: 200, damping: 20 }}
+      >
+        <motion.div
+          className="absolute inset-0 pointer-events-none rounded-2xl opacity-0 transition-opacity duration-300 group-hover/tilt:opacity-100"
+          style={{
+            background: useTransform(
+              [glowX, glowY],
+              ([x, y]) =>
+                `radial-gradient(circle at ${x}% ${y}%, rgba(109, 76, 255, 0.08), transparent 70%)`
+            ),
+          }}
+        />
+        <motion.div
+          whileHover={{ scale }}
+          transition={{ type: "spring", stiffness: 300, damping: 18 }}
+        >
+          {children}
+        </motion.div>
+      </motion.div>
+    </motion.div>
+  );
+}
+
 /* ---------- Section heading ---------- */
 export function SectionHeading({
   title,
@@ -361,12 +460,12 @@ export function LogoBadge({
 export const BRANDS: Record<string, Brand> = {
   googleads: { bg: "linear-gradient(135deg,#fff,#f1f5f9)", fg: "#4285F4", label: "Google Ads", image: "/images/icons8-google-ads-48.png" },
   meta: { bg: "linear-gradient(135deg,#0668E1,#0080FB)", label: "Meta", image: "/images/icons8-meta-48.png" },
-  tiktok: { bg: "#0f0f0f", label: "TikTok", image: "https://cdn.simpleicons.org/tiktok" },
-  linkedin: { bg: "#0A66C2", label: "in", image: "https://cdn.simpleicons.org/linkedin" },
-  microsoft: { bg: "linear-gradient(135deg,#F25022,#7FBA00)", label: "MS", image: "https://cdn.simpleicons.org/microsoft" },
+  tiktok: { bg: "#0f0f0f", label: "TikTok", image: "/images/tiktok-logo.svg" },
+  linkedin: { bg: "#0A66C2", label: "in", image: "/images/linkedin_img.jpg" },
+  microsoft: { bg: "linear-gradient(135deg,#F25022,#7FBA00)", label: "MS", image: "/images/microsoft-img.jpg" },
   pinterest: { bg: "#E60023", label: "Pinterest", image: "/images/icons8-pinterest-48.png" },
   snapchat: { bg: "#FFFC00", fg: "#0f172a", label: "Snap", image: "/images/snapchat-square-color-icon.png" },
-  youtube: { bg: "#FF0000", label: "▶", image: "https://cdn.simpleicons.org/youtube" },
+  youtube: { bg: "#FF0000", label: "▶", image: "/images/youtube-logo.svg" },
   facebook: { bg: "#1877F2", label: "Facebook", image: "/images/icons8-facebook-48.png" },
   canva: { bg: "linear-gradient(135deg,#00C4CC,#7D2AE8)", label: "Canva", image: "/images/canva-seeklogo.png" },
   semrush: { bg: "linear-gradient(135deg,#FF642D,#FF8A47)", label: "Semrush", image: "/images/semrush.png" },
@@ -463,13 +562,10 @@ export function MetaLogo({ size = 44 }: { size?: number }) {
 export function TikTokLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#0f0f0f] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#25F4EE" d="M34.1 4.6H24v26.8c0 3.9-3.2 7-7.1 7s-7.1-3.1-7.1-7 3.2-7 7.1-7c.7 0 1.4.1 2 .3v-9.9c-.7-.1-1.3-.2-2-.2C8.6 14.6 2 21.2 2 29.4s6.6 14.8 14.9 14.8S31.7 37.6 31.7 29.4V16.8c3.1 2.2 6.9 3.5 11 3.5V10.4c-3.2 0-6.1-1.1-8.6-2.9v-2.9z" />
-        <path fill="#fff" d="M34.1 4.6H24v26.8c0 3.9-3.2 7-7.1 7s-7.1-3.1-7.1-7 3.2-7 7.1-7c.7 0 1.4.1 2 .3v-9.9c-.7-.1-1.3-.2-2-.2C8.6 14.6 2 21.2 2 29.4s6.6 14.8 14.9 14.8S31.7 37.6 31.7 29.4V16.8c3.1 2.2 6.9 3.5 11 3.5V10.4c-3.2 0-6.1-1.1-8.6-2.9v-2.9z" opacity="0" />
-      </svg>
+      <img src="/images/tiktok-logo.svg" alt="TikTok" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -478,12 +574,10 @@ export function TikTokLogo({ size = 44 }: { size?: number }) {
 export function LinkedInLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#0A66C2] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#fff" d="M44 4H4v40h40V4zM16.5 35h-5V18h5v17zm-2.5-19.3c-1.6 0-2.9-1.3-2.9-2.9s1.3-2.9 2.9-2.9 2.9 1.3 2.9 2.9-1.3 2.9-2.9 2.9zM36 35h-5v-9.3c0-2.2-.8-3.7-2.8-3.7-1.5 0-2.4 1-2.8 2-.1.3-.2.8-.2 1.3V35h-5V18h5v2.3c.7-1 1.9-2.5 4.6-2.5 3.4 0 6 2.2 6 6.9V35z" />
-      </svg>
+      <img src="/images/linkedin-logo.svg" alt="LinkedIn" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -492,15 +586,10 @@ export function LinkedInLogo({ size = 44 }: { size?: number }) {
 export function MicrosoftLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-white shadow-sm ring-1 ring-slate-200"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <rect x="6" y="6" width="16" height="16" fill="#F25022" rx="1.5" />
-        <rect x="26" y="6" width="16" height="16" fill="#7FBA00" rx="1.5" />
-        <rect x="6" y="26" width="16" height="16" fill="#00A4EF" rx="1.5" />
-        <rect x="26" y="26" width="16" height="16" fill="#FFB900" rx="1.5" />
-      </svg>
+      <img src="/images/microsoft-logo.svg" alt="Microsoft" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -525,12 +614,10 @@ export function PinterestLogo({ size = 44 }: { size?: number }) {
 export function SnapchatLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#FFFC00] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#0f172a" d="M39.4 30.5c-.6-.5-2.3-1.4-3.3-1.8l-.3-.2c-.3-.2-.6-.5-.5-1 .1-.7.4-1.4.6-2.1.6-1.8 1.2-3.9 1.1-5.4-.2-3.2-2-5.9-4.6-7.3-1.1-.6-2.3-.9-3.6-1-2.5-.1-5.1.5-5.2.5-2.4-.5-4.8-.6-7.1-.1-2.4.5-4.4 1.9-5.7 4.1-1.7 2.7-1.8 6.1-.9 9.1.2.7.5 1.4.7 2.1.1.5.1.9-.3 1.2-.3.2-.6.4-.9.6-1.1.6-2.8 1.5-3.5 2-.2.2-.3.5-.2.8.2.7.8 1.2 1.7 1.5.5.2 1.1.3 1.7.5.7.2 1.5.5 1.9 1.2.4.7.4 1.7 1.2 2.6.9 1 2.8 1.4 5 1.4 1.5 0 3.1-.2 4.7-.2 1.6 0 3.2.2 4.7.2 2.2 0 4.1-.4 5-1.4.8-.9.8-1.9 1.2-2.6.4-.7 1.2-1 1.9-1.2.6-.2 1.2-.3 1.7-.5.9-.3 1.5-.8 1.7-1.5.1-.3 0-.6-.2-.8z" />
-      </svg>
+      <img src="/images/snapchat-square-color-icon.png" alt="Snapchat" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -539,12 +626,10 @@ export function SnapchatLogo({ size = 44 }: { size?: number }) {
 export function YouTubeLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#FF0000] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.55} height={size * 0.55} viewBox="0 0 48 48">
-        <path fill="#fff" d="M41.5 15.2c-.5-1.8-1.9-3.2-3.7-3.7C34.4 10.5 24 10.5 24 10.5s-10.4 0-13.8 1c-1.8.5-3.2 1.9-3.7 3.7C6 18.5 6 24 6 24s0 5.5 1 8.8c.5 1.8 1.9 3.2 3.7 3.7 3.4 1 13.8 1 13.8 1s10.4 0 13.8-1c1.8-.5 3.2-1.9 3.7-3.7 1-3.3 1-8.8 1-8.8s0-5.5-1-8.8zM20.5 29.5V18.5L31 24l-10.5 5.5z" />
-      </svg>
+      <img src="/images/youtube-logo.svg" alt="YouTube" className="h-full w-full object-contain" />
     </span>
   );
 }

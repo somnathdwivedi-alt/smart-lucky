@@ -7,6 +7,7 @@ import { ProductOffers } from "./components/ProductOffers";
 import { AdPlatforms, MarketingTools } from "./components/Platforms";
 import ReviewsNews from "./components/ReviewsNews";
 import { Footer, Newsletter } from "./components/NewsletterFooter";
+import { MouseGlow } from "./components/ui";
 import { useRoute } from "./router";
 import AffiliateDetail from "./pages/AffiliateDetail";
 import CategoryListing from "./pages/CategoryListing";
@@ -67,6 +68,7 @@ export default function App() {
 
   return (
     <div className="min-h-screen bg-primary">
+      <MouseGlow />
       <Navbar />
       <main key={route + (id ?? "")}>
         <Page id={id} />

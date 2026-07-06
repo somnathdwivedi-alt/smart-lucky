@@ -1,7 +1,7 @@
 import { ArrowRight } from "lucide-react";
 import { useEffect, useState } from "react";
 import { navigate } from "../router";
-import { BRANDS, GoogleAdsLogo, LogoBadge, Reveal, SectionHeading, CanvaLogo, HostingerLogo, SemrushLogo, EnvatoLogo, ClickFunnelsLogo } from "./ui";
+import { BRANDS, GoogleAdsLogo, LogoBadge, Reveal, SectionHeading, CanvaLogo, HostingerLogo, SemrushLogo, EnvatoLogo, ClickFunnelsLogo, TiltCard, ScaleReveal } from "./ui";
 
 /* ---------------- Today's Best Deals (countdown) ---------------- */
 const DEALS = [
@@ -32,39 +32,42 @@ function DealCard({ deal }: { deal: (typeof DEALS)[number] }) {
     { v: s, l: "Secs" },
   ];
   return (
-    <div className="card card-hover flex h-full flex-col p-4">
+    <div className="group/card card card-hover flex h-full flex-col p-5 bg-white/70 backdrop-blur-md">
       <div className="flex items-center gap-3">
-        {deal.brand === "canva" ? <CanvaLogo size={42} /> :
-         deal.brand === "hostinger" ? <HostingerLogo size={42} /> :
-         deal.brand === "semrush" ? <SemrushLogo size={42} /> :
-         deal.brand === "envato" ? <EnvatoLogo size={42} /> :
-         deal.brand === "clickfunnels" ? <ClickFunnelsLogo size={42} /> :
-         <LogoBadge brand={BRANDS[deal.brand]} size={42} />}
+        <div className="transition-transform duration-300 group-hover/card:scale-105">
+          {deal.brand === "canva" ? <CanvaLogo size={42} /> :
+           deal.brand === "hostinger" ? <HostingerLogo size={42} /> :
+           deal.brand === "semrush" ? <SemrushLogo size={42} /> :
+           deal.brand === "envato" ? <EnvatoLogo size={42} /> :
+           deal.brand === "clickfunnels" ? <ClickFunnelsLogo size={42} /> :
+           <LogoBadge brand={BRANDS[deal.brand]} size={42} />}
+        </div>
         <div>
-          <h3 className="text-[14px] font-bold text-slate-900">{deal.name}</h3>
-          <span className="mt-0.5 inline-block rounded-full bg-emerald-50 px-2 py-0.5 text-[11px] font-extrabold text-emerald-600 ring-1 ring-emerald-200">
+          <h3 className="text-[14px] font-extrabold text-slate-900 group-hover/card:text-indigo-650 transition-colors leading-tight">{deal.name}</h3>
+          <span className="mt-1 inline-block rounded-full bg-gradient-to-r from-emerald-500/10 to-teal-500/10 border border-emerald-500/20 px-2 py-0.5 text-[10px] font-extrabold text-emerald-700 tracking-wide uppercase">
             {deal.off}
           </span>
         </div>
       </div>
-      <p className="mt-2 text-center text-[13px] font-semibold text-slate-500">{deal.on}</p>
-      <p className="mt-2 text-center text-[11px] font-semibold uppercase tracking-wide text-slate-400">
+      <p className="mt-3 text-center text-[13px] font-bold text-slate-700 leading-snug">{deal.on}</p>
+      <p className="mt-4 flex items-center justify-center gap-1.5 text-[11px] font-extrabold uppercase tracking-widest text-slate-400">
+        <span className="h-1.5 w-1.5 rounded-full bg-indigo-600 animate-pulse" />
         Expires in
       </p>
-      <div className="mt-2 grid grid-cols-3 gap-2">
+      <div className="mt-2.5 grid grid-cols-3 gap-2">
         {units.map((u) => (
-          <div key={u.l} className="rounded-xl bg-indigo-50/80 py-2 text-center">
-            <p className="text-[17px] font-extrabold tabular-nums text-indigo-700">{u.v}</p>
-            <p className="text-[10px] font-semibold text-indigo-400">{u.l}</p>
+          <div key={u.l} className="rounded-xl bg-slate-50 border border-slate-100/50 py-2.5 text-center">
+            <p className="text-[17px] font-black tabular-nums text-indigo-600 leading-none">{u.v}</p>
+            <p className="mt-1 text-[9px] font-extrabold uppercase tracking-wider text-slate-400">{u.l}</p>
           </div>
         ))}
       </div>
       <button
         onClick={() => navigate("deal", deal.brand)}
-        className="btn-ripple group mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-200 bg-indigo-50/60 py-2.5 text-[13px] font-bold text-indigo-600 transition-all hover:border-transparent hover:bg-indigo-600 hover:text-white"
+        className="btn-ripple mt-4 flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-200/80 bg-indigo-50/20 py-2.5 text-[13px] font-bold text-indigo-600 shadow-sm transition-all hover:bg-indigo-600 hover:text-white hover:border-transparent hover:shadow-md hover:shadow-indigo-500/20"
       >
         View Deal
-        <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+        <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
       </button>
     </div>
   );
@@ -77,9 +80,11 @@ export function BestDeals() {
           <SectionHeading title="Today's Best Deals" linkLabel="View All Deals" linkRoute="deals" />
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
           {DEALS.map((d, i) => (
-            <Reveal key={d.name} delay={i * 0.07}>
-              <DealCard deal={d} />
-            </Reveal>
+            <ScaleReveal key={d.name} delay={i * 0.07}>
+              <TiltCard>
+                <DealCard deal={d} />
+              </TiltCard>
+            </ScaleReveal>
           ))}
         </div>
       </div>
@@ -103,32 +108,34 @@ export function ComparePlatforms() {
         subtitle="Compare features, pricing and find the best platform for your business."
       />
       <Reveal>
-        <div className="card relative overflow-hidden p-6 sm:p-8">
+        <div className="card relative overflow-hidden p-6 sm:p-8 border border-slate-100 bg-white/70 backdrop-blur-md">
           <div className="pointer-events-none absolute -right-20 -top-20 h-64 w-64 rounded-full bg-violet-100/60 blur-3xl" />
           <div className="pointer-events-none absolute -bottom-20 -left-20 h-64 w-64 rounded-full bg-indigo-100/60 blur-3xl" />
           <div className="relative flex flex-col items-center justify-center gap-8 lg:flex-row lg:gap-6">
             {COMPARE.map((c, i) => (
               <div key={c.name} className="flex flex-col items-center gap-8 lg:flex-row lg:gap-6">
                 {i > 0 && (
-                  <span className="flex h-11 w-11 items-center justify-center rounded-full bg-slate-100 text-[12px] font-extrabold text-slate-400 ring-4 ring-white">
+                  <span className="flex h-10 w-10 items-center justify-center rounded-full bg-gradient-to-r from-indigo-500 to-violet-500 text-[11px] font-black text-white shadow-md shadow-indigo-500/20 ring-4 ring-white">
                     VS
                   </span>
                 )}
-                <div className="flex w-full items-center gap-4 rounded-2xl border border-slate-100 bg-white p-4 shadow-sm transition-shadow hover:shadow-lg sm:w-64">
-                  {c.brand === "googleads" ? (
-                    <GoogleAdsLogo size={50} />
-                  ) : (
-                    <LogoBadge brand={BRANDS[c.brand]} size={50} />
-                  )}
-                  <div>
-                    <p className="font-heading text-[16px] font-extrabold text-slate-900">{c.name}</p>
-                    <p className="text-[12px] text-slate-400">{c.tag}</p>
+                <TiltCard>
+                  <div className="group/cmp flex w-full items-center gap-4 rounded-2xl border border-slate-100 bg-white p-4.5 shadow-sm transition-all duration-300 hover:border-indigo-200/50 hover:shadow-md sm:w-64">
+                    {c.brand === "googleads" ? (
+                      <GoogleAdsLogo size={50} />
+                    ) : (
+                      <LogoBadge brand={BRANDS[c.brand]} size={50} />
+                    )}
+                    <div>
+                      <p className="font-heading text-[15px] font-extrabold text-slate-900 group-hover/cmp:text-indigo-650 transition-colors leading-tight">{c.name}</p>
+                      <p className="mt-1 text-[12px] font-medium text-slate-500 leading-none">{c.tag}</p>
+                    </div>
                   </div>
-                </div>
+                </TiltCard>
               </div>
             ))}
           </div>
-          <div className="relative mt-6 text-center">
+          <div className="relative mt-8 text-center">
             <button
               onClick={() => navigate("compare")}
               className="btn-ripple gradient-bg group inline-flex h-12 items-center gap-2 rounded-xl px-8 text-[14px] font-bold text-white shadow-xl shadow-indigo-500/30 transition-all hover:shadow-indigo-500/50"

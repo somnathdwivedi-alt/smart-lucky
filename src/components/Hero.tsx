@@ -1,23 +1,28 @@
-import { motion } from "framer-motion";
+import { motion, useScroll, useTransform } from "framer-motion";
 import { ArrowRight, ChevronRight, Star } from "lucide-react";
-import { useState } from "react";
+import { useState, useRef } from "react";
 
 const PARTNERS = ["Semrush", "Ahrefs", "Canva", "ChatGPT", "Mailchimp", "HubSpot"];
 
 export default function Hero() {
   const [slide, setSlide] = useState(0);
   const TOTAL = 3;
+  const heroRef = useRef<HTMLDivElement>(null);
+  const { scrollY } = useScroll();
+  const parallaxY = useTransform(scrollY, (y) => Math.min(y * 0.15, 80));
+  const bgScale = useTransform(scrollY, (y) => Math.min(1 + y * 0.0003, 1.15));
 
   return (
-    <section className="relative overflow-hidden">
+    <section ref={heroRef} className="relative overflow-hidden">
       <div className="mx-auto max-w-[1440px] px-4 pt-6 sm:px-8">
         <div className="relative overflow-hidden rounded-[32px] shadow-lg sm:min-h-[580px]">
-          {/* Full background image */}
-          <img
+          {/* Full background image with parallax scroll */}
+          <motion.img
             src="/images/airoplan.jpg"
             alt=""
             className="absolute inset-0 h-full w-full object-cover"
             loading="lazy"
+            style={{ y: parallaxY, scale: bgScale }}
           />
           {/* Dark overlay for readability */}
           <div className="absolute inset-0 bg-gradient-to-r from-white/85 via-white/70 to-white/30 lg:via-white/60 lg:to-transparent" />

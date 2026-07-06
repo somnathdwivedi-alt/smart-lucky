@@ -1,6 +1,6 @@
 import { ArrowRight } from "lucide-react";
 import { navigate } from "../router";
-import { BRANDS, GoogleAdsLogo, MetaLogo, SemrushLogo, CanvaLogo, ClickFunnelsLogo, LogoBadge, Rating, Reveal, SectionHeading, AmazonLogo, ClickBankLogo, ImpactLogo, ShareASaleLogo, CJLogo } from "./ui";
+import { BRANDS, GoogleAdsLogo, MetaLogo, SemrushLogo, CanvaLogo, ClickFunnelsLogo, LogoBadge, Rating, Reveal, SectionHeading, AmazonLogo, ClickBankLogo, ImpactLogo, ShareASaleLogo, CJLogo, TiltCard } from "./ui";
 
 /* ---------------- Trending Marketing Offers ---------------- */
 const OFFERS = [
@@ -59,36 +59,42 @@ export function TrendingOffers() {
         <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
           {OFFERS.map((o, i) => (
             <Reveal key={o.name} delay={i * 0.07}>
-              <div className="card card-hover flex h-full flex-col p-4">
-                <div className="flex items-start justify-between">
-                  {o.brand === "googleads" ? <GoogleAdsLogo size={44} /> :
-                   o.brand === "meta" ? <MetaLogo size={44} /> :
-                   o.brand === "semrush" ? <SemrushLogo size={44} /> :
-                   o.brand === "canva" ? <CanvaLogo size={44} /> :
-                   o.brand === "clickfunnels" ? <ClickFunnelsLogo size={44} /> :
-                   <LogoBadge brand={BRANDS[o.brand]} size={44} />}
-                  {o.sponsored && (
-                    <span className="rounded-full bg-amber-50 px-2.5 py-1 text-[10px] font-bold text-amber-600 ring-1 ring-amber-200">
-                      Sponsored
-                    </span>
-                  )}
+              <TiltCard>
+                <div className="group/card card card-hover flex h-full flex-col p-5 bg-white/70 backdrop-blur-md">
+                  <div className="flex items-start justify-between">
+                    <div className="transition-transform duration-300 group-hover/card:scale-105">
+                      {o.brand === "googleads" ? <GoogleAdsLogo size={44} /> :
+                       o.brand === "meta" ? <MetaLogo size={44} /> :
+                       o.brand === "semrush" ? <SemrushLogo size={44} /> :
+                       o.brand === "canva" ? <CanvaLogo size={44} /> :
+                       o.brand === "clickfunnels" ? <ClickFunnelsLogo size={44} /> :
+                       <LogoBadge brand={BRANDS[o.brand]} size={44} />}
+                    </div>
+                    {o.sponsored && (
+                      <span className="rounded-full bg-gradient-to-r from-amber-500/10 to-orange-500/10 px-2.5 py-0.5 text-[10px] font-extrabold text-amber-700 border border-amber-500/20 tracking-wide uppercase">
+                        Sponsored
+                      </span>
+                    )}
+                  </div>
+                  <h3 className="mt-4 text-[15px] font-extrabold text-slate-900 group-hover/card:text-indigo-600 transition-colors leading-tight">{o.name}</h3>
+                  <Rating value={o.rating} className="mt-1" />
+                  <p className="mt-2.5 flex-1 text-[13px] leading-relaxed text-slate-500 line-clamp-3">{o.desc}</p>
+                  <div
+                    className={`relative mt-4 overflow-hidden rounded-xl border border-dashed py-2 text-center text-[13px] font-extrabold ${o.badgeClass}`}
+                  >
+                    <span className="absolute -left-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-50 border-r border-dashed border-inherit" />
+                    <span className="absolute -right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-50 border-l border-dashed border-inherit" />
+                    <span className="relative z-10">{o.badge}</span>
+                  </div>
+                  <button
+                    onClick={() => navigate("deal", o.brand)}
+                    className="btn-ripple gradient-bg group/btn mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-[13px] font-bold text-white shadow-md shadow-indigo-500/20 hover:shadow-indigo-500/35 transition-all"
+                  >
+                    View Offer
+                    <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
+                  </button>
                 </div>
-                <h3 className="mt-3 text-[16px] font-bold text-slate-900">{o.name}</h3>
-                <Rating value={o.rating} className="mt-1" />
-                <p className="mt-2 flex-1 text-[13px] leading-relaxed text-slate-500">{o.desc}</p>
-                <span
-                  className={`mt-3 block rounded-xl border border-dashed py-2 text-center text-[13px] font-extrabold ${o.badgeClass}`}
-                >
-                  {o.badge}
-                </span>
-                <button
-                  onClick={() => navigate("deal", o.brand)}
-                  className="btn-ripple gradient-bg group mt-2 flex w-full items-center justify-center gap-1.5 rounded-xl py-2.5 text-[13px] font-bold text-white shadow-md shadow-indigo-500/25 transition-shadow hover:shadow-indigo-500/45"
-                >
-                  View Offer
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
-                </button>
-              </div>
+              </TiltCard>
             </Reveal>
           ))}
         </div>
@@ -113,43 +119,51 @@ export function AffiliatePrograms() {
       <div className="grid grid-cols-1 gap-6 sm:grid-cols-2 md:grid-cols-3 xl:grid-cols-5">
         {PROGRAMS.map((p, i) => (
           <Reveal key={p.name} delay={i * 0.07}>
-            <div className="card card-hover flex h-full flex-col p-4">
-              <div className="flex items-center gap-3">
-                {p.brand === "amazon" ? <AmazonLogo size={44} /> :
-                 p.brand === "clickbank" ? <ClickBankLogo size={44} /> :
-                 p.brand === "impact" ? <ImpactLogo size={44} /> :
-                 p.brand === "shareasale" ? <ShareASaleLogo size={44} /> :
-                 p.brand === "cj" ? <CJLogo size={44} /> :
-                 <LogoBadge brand={BRANDS[p.brand]} size={44} />}
-                <div className="min-w-0">
-                  <h3 className="truncate text-[14px] font-bold text-slate-900">{p.name}</h3>
-                  <Rating value={p.rating} />
+            <TiltCard>
+              <div className="group/card card card-hover flex h-full flex-col p-5 bg-white/70 backdrop-blur-md">
+                <div className="flex items-center gap-3">
+                  <div className="transition-transform duration-300 group-hover/card:scale-105">
+                    {p.brand === "amazon" ? <AmazonLogo size={44} /> :
+                     p.brand === "clickbank" ? <ClickBankLogo size={44} /> :
+                     p.brand === "impact" ? <ImpactLogo size={44} /> :
+                     p.brand === "shareasale" ? <ShareASaleLogo size={44} /> :
+                     p.brand === "cj" ? <CJLogo size={44} /> :
+                     <LogoBadge brand={BRANDS[p.brand]} size={44} />}
+                  </div>
+                  <div className="min-w-0">
+                    <h3 className="truncate text-[14px] font-extrabold text-slate-900 group-hover/card:text-indigo-600 transition-colors leading-tight">{p.name}</h3>
+                    <Rating value={p.rating} className="mt-0.5" />
+                  </div>
                 </div>
-              </div>
-              {p.desc && (
-                <p className="mt-3 flex-1 text-[13px] leading-relaxed text-slate-500 line-clamp-2">
-                  {p.desc}
-                </p>
-              )}
-              <p className="mt-3 text-[12px] font-semibold uppercase tracking-wide text-slate-400">
-                Commission
-              </p>
-              <p className="mt-1 text-[24px] font-extrabold tracking-tight text-slate-900">
-                {p.commission}
-              </p>
-              {p.badge && (
-                <span className={`mt-3 block rounded-xl border border-dashed py-2 text-center text-[13px] font-extrabold ${p.badgeClass}`}>
-                  {p.badge}
-                </span>
-              )}
+                {p.desc && (
+                  <p className="mt-3 flex-1 text-[13px] leading-relaxed text-slate-500 line-clamp-2">
+                    {p.desc}
+                  </p>
+                )}
+                <div className="mt-4 rounded-xl bg-slate-50/80 p-3 border border-slate-100/50">
+                  <p className="text-[10px] font-extrabold uppercase tracking-widest text-slate-400">
+                    Commission
+                  </p>
+                  <p className="mt-0.5 text-[22px] font-black tracking-tight text-indigo-600 leading-none">
+                    {p.commission}
+                  </p>
+                </div>
+                {p.badge && (
+                  <div className={`relative mt-3 overflow-hidden rounded-xl border border-dashed py-2 text-center text-[13px] font-extrabold ${p.badgeClass}`}>
+                    <span className="absolute -left-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-50 border-r border-dashed border-inherit" />
+                    <span className="absolute -right-1.5 top-1/2 h-3 w-3 -translate-y-1/2 rounded-full bg-slate-50 border-l border-dashed border-inherit" />
+                    <span className="relative z-10">{p.badge}</span>
+                  </div>
+                )}
                 <button
                   onClick={() => navigate("affiliate", p.brand)}
-                  className="btn-ripple group mt-3 flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-200 py-2.5 text-[13px] font-bold text-indigo-600 transition-all hover:border-transparent hover:bg-indigo-600 hover:text-white"
+                  className="btn-ripple mt-3.5 flex w-full items-center justify-center gap-1.5 rounded-xl border border-indigo-200/80 bg-indigo-50/20 py-2.5 text-[13px] font-bold text-indigo-600 shadow-sm transition-all hover:bg-indigo-600 hover:text-white hover:border-transparent hover:shadow-md hover:shadow-indigo-500/20"
                 >
                   Join Now
-                  <ArrowRight className="h-3.5 w-3.5 transition-transform group-hover:translate-x-1" />
+                  <ArrowRight className="h-3.5 w-3.5 transition-transform duration-300 group-hover/card:translate-x-1" />
                 </button>
-            </div>
+              </div>
+            </TiltCard>
           </Reveal>
         ))}
       </div>
