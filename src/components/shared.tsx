@@ -130,7 +130,7 @@ export function Pagination({ total = 10 }: { total?: number }) {
           key={p}
           onClick={() => setPage(p)}
           className={cn(
-            "h-10 w-10 rounded-xl text-[13px] font-bold transition-all",
+            "h-11 w-11 rounded-xl text-[13px] font-bold transition-all",
             page === p
               ? "gradient-bg text-white shadow-lg shadow-indigo-500/30"
               : "border border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-600"
@@ -140,10 +140,10 @@ export function Pagination({ total = 10 }: { total?: number }) {
         </button>
       ))}
       <span className="px-1 text-slate-400">…</span>
-      <button className="h-10 w-10 rounded-xl border border-slate-200 bg-white text-[13px] font-bold text-slate-600 hover:border-indigo-300 hover:text-indigo-600">
+      <button className="h-11 w-11 rounded-xl border border-slate-200 bg-white text-[13px] font-bold text-slate-600 hover:border-indigo-300 hover:text-indigo-600">
         {total}
       </button>
-      <button className="flex h-10 w-10 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-600">
+      <button className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-600 hover:border-indigo-300 hover:text-indigo-600">
         <ChevronRight className="h-4 w-4" />
       </button>
     </div>

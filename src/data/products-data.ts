@@ -30,8 +30,8 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
     rating: 4.8,
     reviewCount: "12,400 Reviews",
     description: "The most powerful MacBook Pro ever — supercharged by the M4 chip for extraordinary performance, stunning Liquid Retina XDR display, and all-day battery life.",
-    image: "https://images.unsplash.com/photo-1517336714731-489689fd1ca8?w=800&h=500&fit=crop",
-    gallery: ["https://images.unsplash.com/photo-1611186871348-b1ce696e52c9?w=800&h=500&fit=crop", "https://images.unsplash.com/photo-1541807084-5c52b6b3adef?w=800&h=500&fit=crop", "https://images.unsplash.com/photo-1625766763788-95dcce9bf5ac?w=800&h=500&fit=crop"],
+    image: "/images/applemac2.jpg",
+    gallery: ["/images/applemac.jpg", "/images/Hand holding Apple MacBook Air.jpg", "/images/Apple MacBook Neo Citrus Laptop | Aesthetic Luxury Desk Setup Tech for Productivity.jpg"],
     overview: [
       "The MacBook Pro 14″ with the M4 chip delivers a groundbreaking combination of performance and efficiency. Whether you're compiling code, editing 8K video, or running complex simulations, it handles everything with ease.",
       "The Liquid Retina XDR display with ProMotion brings HDR content to life with 1000 nits sustained brightness and 1600 nits peak. The 1080p FaceTime HD camera, six-speaker sound system, and studio-quality three-mic array make it the ultimate pro laptop.",
@@ -354,8 +354,8 @@ export const PRODUCTS_DATA: Record<string, ProductData> = {
     rating: 4.6,
     reviewCount: "14,800 Reviews",
     description: "The future of comfort — full-length Nike Air unit, Flyknit recycled upper, and a bold new silhouette. Designed for movement, built for the planet.",
-    image: "https://images.unsplash.com/photo-1542291026-7eec264c27ff?w=800&h=500&fit=crop",
-    gallery: ["https://images.unsplash.com/photo-1606107557195-0e29a4b5b4aa?w=800&h=500&fit=crop", "https://images.unsplash.com/photo-1595950653106-6c9ebd614d3a?w=800&h=500&fit=crop"],
+    image: "/images/nike1.jpg",
+    gallery: ["/images/nike2.jpg", "/images/Nike Air Force 1.jpg"],
     category: "sneakers",
     meta: [
       { label: "Price", value: "$190" },

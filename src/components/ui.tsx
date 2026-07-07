@@ -359,7 +359,7 @@ export function SectionHeading({
       {linkLabel && (
         <button
           onClick={() => linkRoute ? navigate(linkRoute) : window.history.back()}
-          className="group hidden shrink-0 items-center gap-1.5 text-sm font-semibold text-indigo-600 transition-colors hover:text-violet-600 sm:inline-flex"
+          className="group inline-flex shrink-0 items-center gap-1.5 text-sm font-semibold text-indigo-600 transition-colors hover:text-violet-600"
         >
           {linkLabel}
           <ArrowRight className="h-4 w-4 transition-transform group-hover:translate-x-1" />
@@ -461,8 +461,8 @@ export const BRANDS: Record<string, Brand> = {
   googleads: { bg: "linear-gradient(135deg,#fff,#f1f5f9)", fg: "#4285F4", label: "Google Ads", image: "/images/icons8-google-ads-48.png" },
   meta: { bg: "linear-gradient(135deg,#0668E1,#0080FB)", label: "Meta", image: "/images/icons8-meta-48.png" },
   tiktok: { bg: "#0f0f0f", label: "TikTok", image: "/images/tiktok-logo.svg" },
-  linkedin: { bg: "#0A66C2", label: "in", image: "/images/linkedin_img.jpg" },
-  microsoft: { bg: "linear-gradient(135deg,#F25022,#7FBA00)", label: "MS", image: "/images/microsoft-img.jpg" },
+  linkedin: { bg: "#0A66C2", label: "in", image: "/images/linkedin-logo.svg" },
+  microsoft: { bg: "linear-gradient(135deg,#F25022,#7FBA00)", label: "MS", image: "/images/microsoft-logo.svg" },
   pinterest: { bg: "#E60023", label: "Pinterest", image: "/images/icons8-pinterest-48.png" },
   snapchat: { bg: "#FFFC00", fg: "#0f172a", label: "Snap", image: "/images/snapchat-square-color-icon.png" },
   youtube: { bg: "#FF0000", label: "▶", image: "/images/youtube-logo.svg" },
@@ -654,12 +654,10 @@ export function AmazonLogo({ size = 44 }: { size?: number }) {
 export function ClickBankLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#E4353F] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.5} height={size * 0.5} viewBox="0 0 48 48">
-        <path fill="#fff" d="M12 14h6.5l4.5 8.5L27.5 14H34l-8.5 13.5V34h-3V27.5L14 14zm17 0h3.5l4.5 20h-3.5L31 20.5l-2.5 13.5H25l4.5-20z" />
-      </svg>
+      <img src="/images/clickbank.png" alt="ClickBank" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -800,12 +798,10 @@ export function ChatGPTLogo({ size = 44 }: { size?: number }) {
 export function AhrefsLogo({ size = 44 }: { size?: number }) {
   return (
     <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl bg-[#054ADA] shadow-sm"
+      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
       style={{ width: size, height: size }}
     >
-      <svg width={size * 0.48} height={size * 0.48} viewBox="0 0 48 48">
-        <path fill="#fff" d="M15 10v28h6V26h6v12h6V10h-6v12h-6V10h-6z" />
-      </svg>
+      <img src="https://cdn.simpleicons.org/ahrefs" alt="Ahrefs" className="h-full w-full object-contain" />
     </span>
   );
 }
@@ -870,14 +866,4 @@ export function NotionLogo({ size = 44 }: { size?: number }) {
   );
 }
 
-/* ---------- ClickBank real logo (PNG) ---------- */
-export function ClickBankLogoImg({ size = 44 }: { size?: number }) {
-  return (
-    <span
-      className="inline-flex shrink-0 items-center justify-center rounded-2xl border border-slate-100 bg-white shadow-sm overflow-hidden p-1.5"
-      style={{ width: size, height: size }}
-    >
-      <img src="/images/clickbank.png" alt="ClickBank" className="h-full w-full object-contain" />
-    </span>
-  );
-}
+

@@ -50,14 +50,14 @@ export function AdPlatforms() {
   };
 
   return (
-    <section className="bg-[#FCFCFD]">
+    <section className="bg-secondary">
       <div className="mx-auto max-w-[1440px] px-4 py-8 sm:px-8 lg:py-10">
         <SectionHeading title="Popular Advertising Platforms" linkLabel="View All" linkRoute="tools" />
         <div className="relative">
           {canScrollLeft && (
             <button
               onClick={() => scroll("left")}
-              className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#EEF2F6] bg-white shadow-lg transition-all hover:border-indigo-200 hover:text-indigo-600 sm:-left-4 sm:h-11 sm:w-11"
+              className="absolute -left-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-white shadow-lg shadow-purple-primary/25 transition-all hover:shadow-purple-primary/40 sm:-left-4 sm:h-11 sm:w-11 gradient-bg"
             >
               <ChevronLeft className="h-5 w-5" />
             </button>
@@ -65,7 +65,7 @@ export function AdPlatforms() {
           {canScrollRight && (
             <button
               onClick={() => scroll("right")}
-              className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full border border-[#EEF2F6] bg-white shadow-lg transition-all hover:border-indigo-200 hover:text-indigo-600 sm:-right-4 sm:h-11 sm:w-11"
+              className="absolute -right-3 top-1/2 z-10 flex h-10 w-10 -translate-y-1/2 items-center justify-center rounded-full text-white shadow-lg shadow-purple-primary/25 transition-all hover:shadow-purple-primary/40 sm:-right-4 sm:h-11 sm:w-11 gradient-bg"
             >
               <ChevronRight className="h-5 w-5" />
             </button>
@@ -170,23 +170,22 @@ export function MarketingTools() {
 
     requestAnimationFrame(step);
 
-    // Pause scrolling when hovered so user can interact and click cards
-    const handleMouseEnter = () => {
-      active = false;
-    };
-    const handleMouseLeave = () => {
-      active = true;
-      step();
-    };
+    // Pause scrolling when hovering or touching so user can interact
+    const pause = () => { active = false; };
+    const resume = () => { active = true; step(); };
 
-    el.addEventListener("mouseenter", handleMouseEnter);
-    el.addEventListener("mouseleave", handleMouseLeave);
+    el.addEventListener("mouseenter", pause);
+    el.addEventListener("mouseleave", resume);
+    el.addEventListener("touchstart", pause, { passive: true });
+    el.addEventListener("touchend", resume);
 
     return () => {
       active = false;
       if (el) {
-        el.removeEventListener("mouseenter", handleMouseEnter);
-        el.removeEventListener("mouseleave", handleMouseLeave);
+        el.removeEventListener("mouseenter", pause);
+        el.removeEventListener("mouseleave", resume);
+        el.removeEventListener("touchstart", pause);
+        el.removeEventListener("touchend", resume);
       }
     };
   }, []);

@@ -50,7 +50,7 @@ const CATEGORIES = [
 
 export default function Categories() {
   return (
-    <section className="bg-[#FCFCFD]">
+    <section className="bg-secondary">
       <div className="mx-auto max-w-[1440px] px-4 py-10 sm:px-8 lg:py-14">
         <SectionHeading title="Explore Categories" linkLabel="View All Categories" />
         <div className="grid grid-cols-1 gap-4 sm:grid-cols-2 sm:gap-5 md:grid-cols-3 md:gap-6 xl:grid-cols-5 xl:gap-6">

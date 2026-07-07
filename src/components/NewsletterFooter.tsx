@@ -134,7 +134,7 @@ export function Footer() {
               <a
                 key={i}
                 href="#"
-                className="flex h-9 w-9 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition-all hover:border-transparent hover:bg-indigo-600 hover:text-white"
+                className="flex h-11 w-11 items-center justify-center rounded-xl border border-slate-200 bg-white text-slate-500 transition-all hover:border-transparent hover:bg-indigo-600 hover:text-white"
                 aria-label="Social link"
               >
                 <Icon />
@@ -150,7 +150,7 @@ export function Footer() {
                 <li key={l}>
                   <a
                     href="#"
-                    className="text-[13px] text-slate-500 transition-colors hover:text-indigo-600"
+                    className="inline-block py-1 text-[13px] text-slate-500 transition-colors hover:text-indigo-600"
                   >
                     {l}
                   </a>
